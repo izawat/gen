@@ -137,7 +137,7 @@ func primaryKey(db *sql.DB, tableName string) []string {
 		}
 
 	}
-	fmt.Println(primaryKeys)
+	// fmt.Println(primaryKeys)
 	return primaryKeys
 }
 
@@ -162,8 +162,8 @@ func columnLength(db *sql.DB, tableName string, cols []*sql.ColumnType) []Column
 		if err != nil {
 			panic(err.Error())
 		}
-		fmt.Println(columnName)
-		fmt.Println(columnType)
+		// fmt.Println(columnName)
+		// fmt.Println(columnType)
 		for _, c := range cols {
 			columnNameLower := strings.ToLower(columnName)
 			if strings.ToLower(c.Name()) == columnNameLower {
@@ -209,7 +209,9 @@ func generateFieldsTypes(db *sql.DB, columns []*sql.ColumnType, primaryKeys []st
 		if validateV9Annotation == true {
 			validateRules := []string{}
 			if !nullable {
-				validateRules = append(validateRules, "required")
+				if strings.ToLower(key) != "created_at" && strings.ToLower(key) != "updated_at" {
+					validateRules = append(validateRules, "required")
+				}
 			}
 			if strings.ToLower(colType) == "varchar" {
 				for _, colInfo := range columnLengths {
@@ -236,7 +238,7 @@ func generateFieldsTypes(db *sql.DB, columns []*sql.ColumnType, primaryKeys []st
 		}
 
 		fields = append(fields, field)
-		fmt.Println(annotations)
+		// fmt.Println(annotations)
 	}
 	return fields
 }
