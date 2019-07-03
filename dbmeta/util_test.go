@@ -46,3 +46,21 @@ func Test_Copy(t *testing.T) {
 		t.Errorf("expect: %+v, but got %+x", expected, dst)
 	}
 }
+
+func Test_Contains(t *testing.T) {
+	slice := []string{"Tom", "Jerry"}
+	result := Contains(slice, "Tom")
+	if result == false {
+		t.Errorf("")
+	}
+
+	result = Contains(slice, "Jerry")
+	if result == false {
+		t.Errorf("")
+	}
+
+	result = Contains(slice, "Spike")
+	if result == true {
+		t.Errorf("")
+	}
+}

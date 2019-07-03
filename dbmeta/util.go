@@ -142,3 +142,12 @@ func Copy(dst interface{}, src interface{}) error {
 func isZeroOfUnderlyingType(x interface{}) bool {
 	return x == nil || reflect.DeepEqual(x, reflect.Zero(reflect.TypeOf(x)).Interface())
 }
+
+func Contains(a []string, x string) bool {
+	for _, n := range a {
+		if x == n {
+			return true
+		}
+	}
+	return false
+}

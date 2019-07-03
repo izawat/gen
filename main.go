@@ -34,6 +34,7 @@ var (
 	jsonAnnotation = goopt.Flag([]string{"--json"}, []string{"--no-json"}, "Add json annotations (default)", "Disable json annotations")
 	gormAnnotation = goopt.Flag([]string{"--gorm"}, []string{}, "Add gorm annotations (tags)", "")
 	gureguTypes    = goopt.Flag([]string{"--guregu"}, []string{}, "Add guregu null types", "")
+	validateV9Annotation = goopt.Flag([]string{"--validateV9"}, []string{}, "Add validateV9 annotations", "")
 
 	rest = goopt.Flag([]string{"--rest"}, []string{}, "Enable generating RESTful api", "")
 
@@ -114,7 +115,7 @@ func main() {
 		structName = inflection.Singular(structName)
 		structNames = append(structNames, structName)
 
-		modelInfo := dbmeta.GenerateStruct(db, tableName, structName, "model", *jsonAnnotation, *gormAnnotation, *gureguTypes)
+		modelInfo := dbmeta.GenerateStruct(db, tableName, structName, "model", *jsonAnnotation, *gormAnnotation, *gureguTypes, *validateV9Annotation)
 
 		var buf bytes.Buffer
 		err = t.Execute(&buf, modelInfo)
